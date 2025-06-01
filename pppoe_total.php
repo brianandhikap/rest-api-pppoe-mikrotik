@@ -3,8 +3,6 @@ require('routeros_api.class.php');
 header('Content-Type: application/json');
 
 $API = new RouterosAPI();
-
-$API = new RouterosAPI();
 $host = '0.0.0.0'; // IP Mikrotik
 $user = 'username'; // Username
 $pass = 'password'; // Password
