@@ -11,12 +11,12 @@ $API->debug = false;
 
 $action = null;
 
-if (isset($_GET['disable'])) {
+if (isset($_GET['disable_secret'])) {
     $action = 'disable';
-    $param1 = $_GET['disable'];
-} elseif (isset($_GET['enable'])) {
+    $param1 = $_GET['disable_secret'];
+} elseif (isset($_GET['enable_secret'])) {
     $action = 'enable';
-    $param1 = $_GET['enable'];
+    $param1 = $_GET['enable_secret'];
 } elseif (isset($_GET['edit_profile'])) {
     $action = 'edit_profile';
     $parts = explode('|', $_GET['edit_profile']);
