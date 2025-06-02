@@ -22,7 +22,7 @@ Work tested on v 7.XX
    ```bash
    action.php?add_profile=Paket20M|20M/20M (Add Profile)
    action.php?remove_profile=Paket20M (Remove Profile)
-   action.php?disable=Brian@nextbiy.my.id (Disable Secret Brian@nextbiy.my.id)
-   action.php?enable=Brian@nextbiy.my.id (Enable Secret Brian@nextbiy.my.id)
+   action.php?disable_secret=Brian@nextbiy.my.id (Disable Secret Brian@nextbiy.my.id)
+   action.php?enable_secret=Brian@nextbiy.my.id (Enable Secret Brian@nextbiy.my.id)
 
 ### Star repo is FREE...
