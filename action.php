@@ -115,33 +115,26 @@ if ($API->connect($host, $user, $pass)) {
             break;
 
         case 'add_profile':
-            $parts = explode('|', $param1);
-            if (count($parts) !== 2) {
-                echo json_encode(['status' => 'error', 'message' => 'Format salah. Gunakan ?add_profile=NamaProfile|RateLimit']);
+        case isset($_GET['add_profile']):
+            $parts = explode('|', $_GET['add_profile']);
+            if (count($parts) !== 4) {
+                echo json_encode(['status' => 'error', 'message' => 'Format salah. Gunakan ?add_profile=Nama|local=Pool|remote=Pool|RateLimit']);
                 break;
             }
 
-            $profileName = $parts[0];
-            $rateLimit = $parts[1];
-
-            $API->write('/ppp/profile/print', false);
-            $API->write('?name=' . $profileName);
-            $existing = $API->read();
-
-            if (!empty($existing)) {
-                echo json_encode(['status' => 'error', 'message' => "Profile $profileName sudah ada"]);
-                break;
-            }
+            $name = $parts[0];
+            $local = str_replace('local=', '', $parts[1]);
+            $remote = str_replace('remote=', '', $parts[2]);
+            $rate = $parts[3];
 
             $API->write('/ppp/profile/add', false);
-            $API->write('=name=' . $profileName, false);
-            $API->write('=rate-limit=' . $rateLimit);
+            $API->write('=name=' . $name, false);
+            $API->write('=local-address=' . $local, false);
+            $API->write('=remote-address=' . $remote, false);
+            $API->write('=rate-limit=' . $rate);
             $API->read();
 
-            echo json_encode([
-                'status' => 'success',
-                'message' => "Profile $profileName dengan rate-limit $rateLimit berhasil ditambahkan"
-            ]);
+            echo json_encode(['status' => 'success', 'message' => "Profile $name berhasil ditambahkan"]);
             break;
 
         case 'remove_profile':
