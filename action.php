@@ -17,6 +17,9 @@ if (isset($_GET['disable_secret'])) {
 } elseif (isset($_GET['enable_secret'])) {
     $action = 'enable';
     $param1 = $_GET['enable_secret'];
+} elseif (isset($_GET['add_secret'])) {
+    $action = 'add_secret';
+    $param1 = $_GET['add_secret'];
 } elseif (isset($_GET['edit_profile'])) {
     $action = 'edit_profile';
     $parts = explode('|', $_GET['edit_profile']);
