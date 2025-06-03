@@ -57,6 +57,35 @@ if ($API->connect($host, $user, $pass)) {
             }
             break;
 
+        case isset($_GET['add_secret']):
+            $raw = $_GET['add_secret'];
+            $parts = explode('|', $raw);
+
+            $data = [];
+            foreach ($parts as $part) {
+                if (strpos($part, '=') !== false) {
+                    list($key, $value) = explode('=', $part, 2);
+                    $data[$key] = $value;
+                } else {
+                    $data['name'] = $part;
+                }
+            }
+
+            if (empty($data['name']) || empty($data['password']) || empty($data['service']) || empty($data['profile'])) {
+                echo json_encode(['status' => 'error', 'message' => 'Parameter tidak valid']);
+                break;
+            }
+
+            $API->write('/ppp/secret/add', false);
+            $API->write('=name=' . $data['name'], false);
+            $API->write('=password=' . $data['password'], false);
+            $API->write('=service=' . $data['service'], false);
+            $API->write('=profile=' . $data['profile']);
+            $API->read();
+
+            echo json_encode(['status' => 'success', 'message' => 'Secret berhasil ditambahkan']);
+            break;
+
         case 'edit_profile':
             $newProfile = $param1;
             $username = $param2;
